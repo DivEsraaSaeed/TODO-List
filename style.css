@@ -1,0 +1,257 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+:root{
+    --background-color:#000430;
+    --secondry-color:#171c48;
+    --text-color:#fff;
+    --style-color:#828dff;
+    --border-color:#24feee;
+}
+body{
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: "Nunito", sans-serif;
+    overflow-x: hidden;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 600px;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+h1{
+    margin-bottom: 20px;
+}
+.status-content{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border: 2px solid var(--style-color);
+    border-radius: 10px;
+    width: 100%;
+    padding: 15px;
+
+}
+.details{
+    width: 50%;
+}
+#number{
+    width: 100px;
+    height: 100px;
+    background-color: var(--style-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 22px;
+}
+.progress-bar{
+    width: 100%;
+    height: 8px;
+    background-color: var(--secondry-color);
+    border-radius: 10px;
+    margin:20px 0 ;
+    
+}
+.progress{
+    width: 0%;
+    height: 100%;
+    background-color: var(--border-color);
+    border-radius: 10px;
+    transition: .5s all ease;
+}
+.input-task{
+    width: 100%;
+    display: flex;
+    margin-top: 50px;
+}
+input{
+    flex: 1;
+    padding: 15px;
+    background-color: var(--secondry-color);
+    border: 1px solid var(--style-color);
+    border-radius: 10px;
+    color: var(--text-color);
+    outline: none;
+}
+input::placeholder{
+    color: var(--text-color);
+    font-family: "Nunito", sans-serif;
+}
+.add{
+    cursor: pointer;
+    background-color: var(--style-color);
+    color: var(--text-color);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    border: none;
+    font-size: 20px;
+    margin-left: 20px;
+}
+.tasks-list{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+    list-style: none;
+    margin-top: 30px;
+    list-style: none;
+}
+.item{
+    display: flex;
+    align-items: center;
+    background-color: var(--secondry-color);
+    width: 100%;
+    justify-content: space-between;
+    padding: 20px;
+    border-radius: 15px;
+}
+.item div{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.item input{
+    width: 18px;
+    height: 18px;
+}
+.icons .update{
+    color: var(--style-color);
+    cursor: pointer;
+}
+.icons .delete{
+    color: #b50404;
+    cursor: pointer;
+}
+.completed{
+    text-decoration: line-through;
+}
+.complete{
+    background-color: rgb(85, 41, 220);
+}
+.flipInX{
+    animation: flipInX .5s ease ;
+}
+#complete-btn,
+#incomplete-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin-top: 20px;
+    cursor: pointer;
+    border-radius: 20px;
+    border-color: var(--secondry-color);
+    transition: background-color 0.3s;
+    margin-right: 10px;
+}
+
+#complete-btn.active,
+#incomplete-btn.active {
+    background-color: var(--style-color);
+    color: white;
+}
+
+#complete-btn.inactive,
+#incomplete-btn.inactive {
+    background-color: var(--secondry-color);
+    color: white;
+}
+#notifyBox{
+    position: absolute;
+    bottom: 5px;
+    right: 30px;
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    align-items: flex-end;
+    overflow: hidden;
+    gap: 10px;
+}
+.toast{
+    width: 250px;
+    height: 50px;
+    background-color: var(--text-color);
+    color: black;
+    border-radius: 7px;
+    box-shadow: 0px 0 10px #ffffff7d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transform: translateX(100%);
+    animation: appear .5s forwards linear;
+}
+.toast::before{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background-color: #828dff;
+    animation: notify 2s forwards ;
+}
+.toast.edited::before{
+    background-color: var(--border-color);
+}
+.toast.deleted::before{
+    background-color: #b50404;
+}
+@keyframes notify {
+    to{
+        width: 0;
+    }
+}
+@keyframes appear {
+    to{
+        transform: translateX(0);
+    }
+}
+@keyframes flipInX {
+    from {
+        transform: perspective(400px) rotateX(90deg);
+        opacity: 0;
+    }
+
+    40% {
+        transform: perspective(400px) rotateX(-20deg);
+    }
+
+    60% {
+        transform: perspective(400px) rotateX(10deg);
+        opacity: 1;
+    }
+
+    80% {
+        transform: perspective(400px) rotateX(-5deg);
+    }
+
+    to {
+        transform: perspective(400px);
+    }
+}
+.slide-out {
+    animation: slideOut 2s forwards;
+}
+
+@keyframes slideOut {
+    0% {
+        transform: translateX(0);
+        /* Start at original position */
+        opacity: 1;
+        /* Fully visible */
+    }
+
+    100% {
+        transform: translateX(100vw);
+        /* Move out of view */
+        opacity: 0;
+        /* Fade out */
+    }
+}
